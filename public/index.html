@@ -64,11 +64,11 @@
       <div class="av bot">IS</div>
       <div class="bubble bot">Bienvenue à l'<strong>ISSP/MS</strong> !<br><br>Je suis votre assistant virtuel. Je peux répondre à toutes vos questions sur l'institut, ses formations, ses missions et ses objectifs.<br><br>Comment puis-je vous aider ?
         <div class="quick-btns">
-          <button class="qbtn" onclick="quickSend('Quelles formations propose l\'ISSP/MS ?')">Formations disponibles</button>
-          <button class="qbtn" onclick="quickSend('Quelle est la mission de l\'ISSP/MS ?')">Mission de l'institut</button>
-          <button class="qbtn" onclick="quickSend('L\'ISSP/MS est-il officiellement reconnu ?')">Reconnaissance officielle</button>
-          <button class="qbtn" onclick="quickSend('Quels sont les débouchés après une formation ?')">Débouchés & carrières</button>
-          <button class="qbtn" onclick="quickSend('Quels partenaires travaillent avec l\'ISSP/MS ?')">Partenaires</button>
+          <button class="qbtn" data-q="Quelles formations propose l'ISSP/MS ?">Formations disponibles</button>
+          <button class="qbtn" data-q="Quelle est la mission de l'ISSP/MS ?">Mission de l'institut</button>
+          <button class="qbtn" data-q="L'ISSP/MS est-il officiellement reconnu ?">Reconnaissance officielle</button>
+          <button class="qbtn" data-q="Quels sont les debouches apres une formation ?">Débouchés & carrières</button>
+          <button class="qbtn" data-q="Quels partenaires travaillent avec l'ISSP/MS ?">Partenaires</button>
         </div>
       </div>
     </div>
@@ -107,6 +107,13 @@ function addMsg(text, role) {
 }
 
 function quickSend(t) { inp.value = t; send(); }
+
+document.querySelectorAll('.qbtn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    inp.value = this.getAttribute('data-q');
+    send();
+  });
+});
 
 async function send() {
   const text = inp.value.trim();
